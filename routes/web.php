@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ZohoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+// Contact
+Route::prefix('')
+    ->controller(ContactController::class)
+    ->group(function () {
+        Route::get('', 'listContacts')->name('index');
+        Route::get('add', 'add')->name('index');
+        Route::post('submit', 'addContact')->name('submit');
+        Route::get('token', 'token')->name('token');
+    });
+
+
