@@ -15,20 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-// Contact
-/*Route::prefix('')
-    ->controller(ContactController::class)
-    ->group(function () {
-        Route::get('', 'listContacts')->name('index');
-        Route::get('add', 'add')->name('index');
-        Route::post('submit', 'addContact')->name('submit');
-        Route::get('token', 'token')->name('token');
-    });*/
-
 Route::prefix('')
     ->controller(ZohoController::class)
     ->group(function () {
@@ -44,10 +30,3 @@ Route::prefix('')
         Route::put('update', 'update')->name('update');
         Route::get('delete/{id}', 'delete')->name('delete');
     });
-
-
-/*Route::get('/generate-code',[ZohoController::class,'login'])->name("login");
-Route::get('/tokens',[ZohoController::class,'tokens'])->name("tokens");
-Route::get('/refresh',[ZohoController::class,'refreshToken'])->name("refreshToken");
-Route::get('/list',[ZohoController::class,'list'])->name("list");
-Route::get('/store',[ZohoController::class,'store'])->name("store");*/
