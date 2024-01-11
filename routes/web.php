@@ -36,8 +36,12 @@ Route::prefix('')
         Route::get('tokens', 'tokens')->name('tokens');
         Route::get('refresh', 'refreshToken')->name('refreshToken');
         Route::get('list', 'list')->name('list');
+        Route::get('details/{id}', 'details')->name('details');
         Route::get('add-data', 'add')->name('add');
         Route::post('store', 'store')->name('store');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::put('update', 'update')->name('update');
     });
 
 

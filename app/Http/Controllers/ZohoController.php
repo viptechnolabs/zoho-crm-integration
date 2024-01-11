@@ -78,6 +78,24 @@ class ZohoController extends Controller
 
     }
 
+    public function details($id)
+    {
+        try {
+            $access_token = $this->refreshToken();
+            $response = Http::withHeaders([
+                'Authorization' => 'Zoho-oauthtoken ' . $access_token,
+                'Content-Type' => 'application/json',
+            ])->get('https://www.zohoapis.in/crm/v2/Contacts/' . $id);
+
+            $data = $response->json();
+            return $data['data'][0];
+            dd($data['data'][0]);
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+        }
+
+    }
+
     public function add(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('contact');
@@ -107,7 +125,46 @@ class ZohoController extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://www.zohoapis.in/crm/v2/Contacts',$data);
             $data = $response->json();
-            dd($data);
+            dd($data['data'][0]);
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+        }
+
+    }
+
+    public function edit($id): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $details = $this->details($id);
+        return view('edit-contact', compact('details'));
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->input('id');
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
+        $email = $request->input('email');
+        $message = $request->input('message');
+
+        try {
+            $access_token = $this->refreshToken();
+            $data = [
+                "data" => [
+                    [
+                        "First_Name" => $first_name,
+                        "Last_Name"=>$last_name,
+                        "Email"=>$email,
+                        "Description"=>$message
+                    ]
+                ]
+            ];
+            $response = Http::withHeaders([
+                'Authorization' => 'Zoho-oauthtoken ' . $access_token,
+                'Content-Type' => 'application/json',
+            ])->put('https://www.zohoapis.in/crm/v2/Contacts/' . $id, $data);
+
+            $data = $response->json();
+            dd($data['data'][0]);
         }catch (\Exception $exception){
             dd($exception->getMessage());
         }
