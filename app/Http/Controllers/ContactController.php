@@ -15,22 +15,25 @@ class ContactController extends Controller
     public function __construct()
     {
         // Replace 'YOUR_AUTH_TOKEN' with your Zoho CRM auth token
-        //$this->authToken = 'YOUR_AUTH_TOKEN';
+        $this->authToken = config('site.access_token');
         $this->module = 'Contacts'; // The module where contacts are stored
     }
 
     public function token()
     {
+        $token = $this->getZohoCRMToken();
+        dd($token);
+//        $token1 = '1000.f69a9c8b0cdd43c67ca5b2d4305c4693.6860fa0ff3de0db6e9dcb7f82bab2e95';
        // $this->authToken = 'token';
-       // $this->authToken = $this->getZohoCRMToken();
-        dd($this->authToken);
-        return $this->authToken;
+        //$this->authToken = $this->getZohoCRMToken();
+      //  dd($this->authToken);
+//        return $token1;
     }
 
     public function getZohoCRMToken() {
         $clientId = '1000.QB1UAF3F9VYS3LIGSCDCXSMKV8XSAU';
         $clientSecret = '36141f1a725c0be433f9da11e64330d672e2f3b8e8';
-        $code = '1000.ad214aaef8b564421d3661d674edc046.4a291a3e8b87ed0d123a05d2fffe377b';
+        $code = '1000.f0ae3c6630ecc4b864514950ad98852e.4bca2ee6280514ebadd2b294d5f2fcac';
 
         // Zoho's token endpoint
         $url = 'https://accounts.zoho.in/oauth/v2/token';
@@ -63,9 +66,10 @@ class ContactController extends Controller
 
     public function listContacts()
     {
-       // $token = $this->getZohoCRMToken();
-        $token1 = '1000.c1f81ee37305d4316e1137262b534a29.dd1b10352b898525d235ca258ec61844';
-        $this->authToken = $token1;
+       // dd($this->authToken);
+     //  $token = $this->getZohoCRMToken();
+        //$token1 = '1000.c1f81ee37305d4316e1137262b534a29.dd1b10352b898525d235ca258ec61844';
+        //$this->authToken = $token1;
         //dd($this->authToken);
         /* $this->authToken = '1000.d49fda574006f6c7e3376817b70414b7.7b2180fb929c0457e2eee7b29f4664c0';
          dd($this->authToken);*/
@@ -73,7 +77,7 @@ class ContactController extends Controller
         $client = new Client([
             'base_uri' => 'https://www.zohoapis.in/crm/v2/',
             'headers' => [
-                'Authorization' => 'Zoho-oauthtoken ' . $this->getZohoCRMToken(),
+                'Authorization' => 'Zoho-oauthtoken ' . $this->authToken,
                 'Content-Type' => 'application/json',
             ],
         ]);
@@ -115,7 +119,7 @@ class ContactController extends Controller
         $client = new Client([
             'base_uri' => 'https://www.zohoapis.com/crm/v2/',
             'headers' => [
-                'Authorization' => 'Zoho-oauthtoken ' . $token1,
+                'Authorization' => 'Zoho-oauthtoken ' . $this->authToken,
                 'Content-Type' => 'application/json',
             ],
         ]);
