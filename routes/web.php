@@ -20,13 +20,29 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 // Contact
-Route::prefix('')
+/*Route::prefix('')
     ->controller(ContactController::class)
     ->group(function () {
         Route::get('', 'listContacts')->name('index');
         Route::get('add', 'add')->name('index');
         Route::post('submit', 'addContact')->name('submit');
         Route::get('token', 'token')->name('token');
+    });*/
+
+Route::prefix('')
+    ->controller(ZohoController::class)
+    ->group(function () {
+        Route::get('generate-code', 'login')->name('login');
+        Route::get('tokens', 'tokens')->name('tokens');
+        Route::get('refresh', 'refreshToken')->name('refreshToken');
+        Route::get('list', 'list')->name('list');
+        Route::get('add-data', 'add')->name('add');
+        Route::post('store', 'store')->name('store');
     });
 
 
+/*Route::get('/generate-code',[ZohoController::class,'login'])->name("login");
+Route::get('/tokens',[ZohoController::class,'tokens'])->name("tokens");
+Route::get('/refresh',[ZohoController::class,'refreshToken'])->name("refreshToken");
+Route::get('/list',[ZohoController::class,'list'])->name("list");
+Route::get('/store',[ZohoController::class,'store'])->name("store");*/

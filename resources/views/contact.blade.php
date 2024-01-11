@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-<form action="{{ route('submit') }}" method="POST">
+<form action="{{ route('store') }}" method="POST">
     @csrf
     <h1>SIGN UP</h1>
     <div class="icon">
@@ -81,8 +81,7 @@
                 <label for="email"><strong>E-mail</strong></label>
                 <input type="email" class="form-controller" placeholder="Enter E-mail" name="email" required>
                 <label for="message"><strong>Message</strong></label>
-                <textarea class="form-controller" name="message" placeholder="Message" required>
-                </textarea>
+                <textarea class="form-controller" name="message" placeholder="Message" required></textarea>
             </div>
             <button type="submit"><strong>Submit</strong></button>
     </div>
