@@ -42,6 +42,7 @@ Route::prefix('')
         Route::post('store', 'store')->name('store');
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::put('update', 'update')->name('update');
+        Route::get('delete/{id}', 'delete')->name('delete');
     });
 
 

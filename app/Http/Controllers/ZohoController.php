@@ -170,4 +170,21 @@ class ZohoController extends Controller
         }
 
     }
+
+    public function delete($id)
+    {
+        try {
+            $access_token = $this->refreshToken();
+
+            $response = Http::withHeaders([
+                'Authorization' => 'Zoho-oauthtoken ' . $access_token,
+                'Content-Type' => 'application/json',
+            ])->delete('https://www.zohoapis.in/crm/v2/Contacts/' . $id);
+
+            $data = $response->json();
+            dd($data['data'][0]);
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+        }
+    }
 }
