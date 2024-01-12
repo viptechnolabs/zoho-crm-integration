@@ -10,6 +10,7 @@ class ZohoController extends Controller
 {
     public function login(Request $request)
     {
+        return view('contact');
         try {
             $clientId = env("ZOHO_CLIENT_ID");
             $clientSecret = env("ZOHO_CLIENT_SECRET");
@@ -98,7 +99,7 @@ class ZohoController extends Controller
 
     public function add(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('contact');
+        return view('add-contact');
     }
 
     public function store(Request $request)
