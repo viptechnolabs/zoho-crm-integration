@@ -21,7 +21,7 @@ Route::prefix('')
         Route::get('generate-code', 'login')->name('login');
         Route::get('tokens', 'tokens')->name('tokens');
         Route::get('refresh', 'refreshToken')->name('refreshToken');
-        Route::get('list', 'list')->name('list');
+        Route::get('', 'list')->name('list');
         Route::get('details/{id}', 'details')->name('details');
         Route::get('add-data', 'add')->name('add');
         Route::post('store', 'store')->name('store');
