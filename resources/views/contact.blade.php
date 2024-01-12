@@ -36,24 +36,32 @@
 <body>
 
 <h2>Contact List</h2>
-<button class="button button-add">Add Contact</button>
+<a href="{{ route('add') }}" class="button button-add">Add Contact</a>
 
 <table>
     <tr>
+        <th>#</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
         <th>Message</th>
         <th colspan="2">Action</th>
     </tr>
-    <tr>
-        <td>Test</td>
-        <td>Test</td>
-        <td>test@test.test</td>
-        <td>Message</td>
-        <td>Edit</td>
-        <td>Delete</td>
-    </tr>
+    @forelse($data as $key => $d)
+        <tr>
+            <td>{{ ++$key }}</td>
+            <td>{{ $d['First_Name'] }}</td>
+            <td>{{ $d['Last_Name'] }}</td>
+            <td>{{ $d['Email'] }}</td>
+            <td>{{ $d['Description'] }}</td>
+            <td><a href="{{ route('edit', $d['id']) }}">Edit</a></td>
+            <td><a href="{{ route('delete', $d['id']) }}">Delete</a></td>
+        </tr>
+    @empty
+        <tr>
+            <td>Not Data Found</td>
+        </tr>
+    @endforelse
 </table>
 
 </body>

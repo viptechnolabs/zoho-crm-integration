@@ -10,7 +10,6 @@ class ZohoController extends Controller
 {
     public function login(Request $request)
     {
-        return view('contact');
         try {
             $clientId = env("ZOHO_CLIENT_ID");
             $clientSecret = env("ZOHO_CLIENT_SECRET");
@@ -71,8 +70,9 @@ class ZohoController extends Controller
                 'Authorization' => 'Zoho-oauthtoken ' . $access_token,
                 'Content-Type' => 'application/json',
             ])->get('https://www.zohoapis.in/crm/v2/Contacts');
-            $data = $response->json();
-            dd($data);
+            $data = $response->json()['data'];
+            return view('contact', compact('data'));
+            //dd($data);
         }catch (\Exception $exception){
             dd($exception->getMessage());
         }
@@ -126,6 +126,7 @@ class ZohoController extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://www.zohoapis.in/crm/v2/Contacts',$data);
             $data = $response->json();
+            return redirect()->route('list');
             dd($data['data'][0]);
         }catch (\Exception $exception){
             dd($exception->getMessage());
@@ -165,6 +166,7 @@ class ZohoController extends Controller
             ])->put('https://www.zohoapis.in/crm/v2/Contacts/' . $id, $data);
 
             $data = $response->json();
+            return redirect()->route('list');
             dd($data['data'][0]);
         }catch (\Exception $exception){
             dd($exception->getMessage());
@@ -183,6 +185,7 @@ class ZohoController extends Controller
             ])->delete('https://www.zohoapis.in/crm/v2/Contacts/' . $id);
 
             $data = $response->json();
+            return redirect()->route('list');
             dd($data['data'][0]);
         }catch (\Exception $exception){
             dd($exception->getMessage());
