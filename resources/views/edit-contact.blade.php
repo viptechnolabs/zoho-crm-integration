@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Simple Sign up from</title>
+<title>Edit Contact</title>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -69,7 +69,7 @@
 <form action="{{ route('update') }}" method="POST">
     @csrf
     @method('PUT')
-    <h1>SIGN UP</h1>
+    <h1>Edit Contact</h1>
     <div class="icon">
         <i class="fas fa-user-circle"></i>
     </div>
